@@ -1,5 +1,4 @@
 import React from "react";
-import "./SortSelect.css";
 
 const SortSelect = ({ sortOption, setSortOption }) => {
   return (

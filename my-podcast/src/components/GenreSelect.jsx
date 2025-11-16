@@ -1,5 +1,4 @@
 import React from "react";
-import "./GenreSelect.css";
 
 const GenreSelect = ({ genres, selectedGenre, setSelectedGenre }) => {
   return (

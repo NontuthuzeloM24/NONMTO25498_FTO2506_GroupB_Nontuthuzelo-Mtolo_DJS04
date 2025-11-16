@@ -6,7 +6,7 @@ import SortSelect from "./components/SortSelect";
 import GenreSelect from "./components/GenreSelect";
 import PodcastGrid from "./components/PodcastGrid";
 import Pagination from "./components/Pagination";
-import { fetchPodcasts } from "./fetchData";
+import { fetchPodcasts } from "./api/fetchData";
 import { genresData } from "./data";
 
 function App() {
