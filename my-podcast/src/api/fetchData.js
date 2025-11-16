@@ -1,4 +1,4 @@
-const API_URL = "https://podcast-api.netlify.app/";
+const API_URL = "https://podcast-api.netlify.app";
 
 /**
  * Fetch podcasts from the API.
