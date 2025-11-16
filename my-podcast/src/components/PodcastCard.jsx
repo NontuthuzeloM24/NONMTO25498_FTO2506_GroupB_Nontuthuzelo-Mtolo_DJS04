@@ -1,7 +1,8 @@
-import React from "react";
-
 /**
- * Individual podcast card
+ * Podcast card component
+ * @param {Object} props
+ * @param {Object} props.podcast - Podcast item
+ * @param {Function} props.onClick - Open modal callback
  */
 const PodcastCard = ({ podcast, onClick }) => {
   return (
@@ -9,14 +10,16 @@ const PodcastCard = ({ podcast, onClick }) => {
       <img src={podcast.image} alt={podcast.title} />
       <h3>{podcast.title}</h3>
       <p>{podcast.description.substring(0, 100)}...</p>
+
       <div className="tags">
         {podcast.tags.map((tag, i) => (
-          <span className="tag" key={i}>
-            {tag}
-          </span>
+          <span key={i} className="tag">{tag}</span>
         ))}
       </div>
-      <p className="updated-text">Updated: {new Date(podcast.updated).toLocaleDateString()}</p>
+
+      <p className="updated-text">
+        Updated: {new Date(podcast.updated).toLocaleDateString()}
+      </p>
     </div>
   );
 };

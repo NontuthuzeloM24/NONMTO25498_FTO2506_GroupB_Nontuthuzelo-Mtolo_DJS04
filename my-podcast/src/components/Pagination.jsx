@@ -1,17 +1,20 @@
-import React from "react";
-
+/**
+ * Pagination component
+ * @param {Object} props
+ * @param {number} props.currentPage
+ * @param {Function} props.setCurrentPage
+ * @param {number} props.totalPages
+ */
 const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
   return (
-    <div style={{ margin: "1rem" }}>
+    <div className="pagination">
       {pages.map((page) => (
         <button
           key={page}
+          className={page === currentPage ? "active" : ""}
           onClick={() => setCurrentPage(page)}
-          style={{
-            margin: "0 5px",
-            fontWeight: page === currentPage ? "bold" : "normal",
-          }}
         >
           {page}
         </button>
@@ -21,3 +24,4 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
 };
 
 export default Pagination;
+
