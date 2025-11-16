@@ -1,8 +1,5 @@
 # DSJ04 React Podcast App: Search, Sort, Filter, and Pagination
 
-Here's an updated README with your implemented features:
-markdown# DSJ04 React Podcast App: Search, Sort, Filter, and Pagination
-
 ## Project Overview
 A modern podcast browsing application built with React that provides users with an intuitive interface to discover and explore podcasts. The app features dynamic search, sorting, filtering, and pagination capabilities, delivering a seamless browsing experience with real-time updates and consistent state management.
 
