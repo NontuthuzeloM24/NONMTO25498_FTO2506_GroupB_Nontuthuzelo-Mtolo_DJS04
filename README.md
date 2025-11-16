@@ -1,90 +1,96 @@
 # DSJ04 React Podcast App: Search, Sort, Filter, and Pagination
 
+Here's an updated README with your implemented features:
+markdown# DSJ04 React Podcast App: Search, Sort, Filter, and Pagination
+
 ## Project Overview
+A modern podcast browsing application built with React that provides users with an intuitive interface to discover and explore podcasts. The app features dynamic search, sorting, filtering, and pagination capabilities, delivering a seamless browsing experience with real-time updates and consistent state management.
 
-In this project, you will build an advanced podcast browsing experience that allows users to dynamically **search**, **sort**, **filter**, and **paginate** a list of podcast shows. The goal is to create an intuitive interface that responds to user input in real time and maintains a consistent, seamless experience throughout navigation.
+## Features
 
-This project will test your ability to manage complex UI state, synchronise multiple user interactions, and maintain clean, scalable code.
+### 🔍 Search Functionality
+- Flexible search that matches any part of podcast titles
+- Real-time search results as you type
+- Search integrates seamlessly with active filters, sorts, and pagination
+- Maintains search state across navigation
 
-## Core Objectives
+### 🔄 Sorting Options
+- **Newest First**: Sort by last updated date
+- **Title A–Z**: Alphabetical sorting (ascending)
+- **Title Z–A**: Alphabetical sorting (descending)
+- Sorting works in conjunction with search and filter criteria
 
-### Search Functionality
+### 🎯 Genre Filtering
+- Filter podcasts by genre using an intuitive dropdown
+- Filters work alongside search, sort, and pagination
+- Selected filters persist across page navigation
 
-- Implement a flexible search that matches any part of the podcast title.
-- Results should update dynamically as the user types or upon submission.
-- Ensure that search results integrate with current filters, sorts, and pagination without resetting them.
+### 📄 Pagination
+- Clean pagination interface for manageable content display
+- Pagination respects all active search, filter, and sort states
+- UI selections remain intact while navigating between pages
 
-### Sorting Options
+### 🎨 User Interface
+- Responsive design that works on desktop, tablet, and mobile
+- Card-based layout with podcast cover art
+- Hover effects and smooth transitions
+- Modal view for detailed podcast information
+- Clean, modern aesthetic with intuitive controls
 
-- Allow sorting podcasts by:
-  - Newest first (based on last updated date).
-  - Title A–Z and Z–A.
-- Sorting must work in tandem with any search or filter criteria.
+## Technology Stack
+- **React** - UI library
+- **CSS3** - Styling with responsive design
+- **Fetch API** - Data fetching from podcast API
 
-### Filtering
+## API Integration
 
-- Enable genre-based filtering using a dropdown or multi-select input.
-- Ensure filters work alongside current search, sort, and pagination state.
-- Maintain selected filters when navigating between pages or updating the list.
+### Endpoint
+```
+https://podcast-api.netlify.app
+```
+
+Returns an array of podcast previews with the following structure:
+- `id`: Unique podcast identifier
+- `title`: Podcast name
+- `description`: Brief description
+- `seasons`: Number of seasons
+- `image`: Cover art URL
+- `genres`: Array of genre IDs
+- `updated`: Last update timestamp
+
+### Genre Mapping
+Genre IDs are mapped to human-readable titles using the `data.js` file included in the project. This mapping ensures proper display of genre names throughout the application.
+
+## State Management
+The application uses React's built-in state management with hooks:
+- `useState` for component-level state
+- Centralized state for search, filter, sort, and pagination
+- State synchronization ensures all UI controls remain in sync
+
+## Code Quality
+- **JSDoc comments** for all major functions and components
+- **Consistent formatting** with clear naming conventions
+- **Modular architecture** with reusable components
+- **Clean separation** of concerns between UI and logic
+
+## Key Features Implementation
+
+### Search
+- Searches across podcast titles
+- Case-insensitive matching
+- Updates results dynamically
+
+### Sort
+- Maintains sort preference across interactions
+- Works with filtered and searched results
+
+### Filter
+- Genre-based filtering with dropdown selection
+- "All Genres" option to show all podcasts
+- Filter state persists across pagination
 
 ### Pagination
-
-- Display podcasts in manageable chunks using pagination, load-more, or infinite scroll.
-- Ensure that pagination respects the currently active search, filter, and sort state.
-- Keep all UI selections intact while navigating pages.
-
-### State Synchronisation
-
-- Maintain a centralised and cleanly organised state using React state, context, or a state management library.
-- Ensure that all controls (search, sort, filter, pagination) reflect changes immediately and stay in sync.
-
-### Code Quality & Maintainability
-
-- Use JSDoc to document all major functions and modules.
-- Apply consistent formatting and naming conventions.
-- Keep logic modular and components reusable.
-
-### API Endpoints
-
-Data can be called via a `fetch` request to the following endpoint.
-
-| URL                               |                             |
-| --------------------------------- | --------------------------- |
-| `https://podcast-api.netlify.app` | Returns an array of PREVIEW |
-
-### Genre Titles
-
-Since the podcast preview information fetched from the API only exposes genres by their IDs, the actual genre details (such as titles) are not included in the API response. These details are instead provided in the data.js file found in this repository. Therefore, it is recommended that you include the mapping between genre ID values and their corresponding titles in your code using this file.
-
-## Project Deliverables
-
-- A fully functional React app that:
-
-  - Fetches and displays podcast data.
-  - Allows live searching, sorting, filtering, and pagination.
-  - Maintains consistent state across all UI interactions.
-
-- **Clean Codebase** with:
-
-  - Reusable, modular components.
-  - Clear and consistent formatting across all files.
-  - JSDoc comments for functions/modules.
-
-- **README.md** with:
-
-  - Project overview and purpose.
-  - Setup and usage instructions.
-  - Descriptions of key features (search, filter, sort, pagination).
-
-- **Version Control (GitHub)**:
-  - Clear, meaningful commit messages.
-  - Incremental commits reflecting development progress.
-
-## Success Criteria
-
-- No console errors or broken UI on load.
-- All features work correctly and together without losing state.
-- Clean, maintainable codebase with documentation.
-- A polished user experience with responsive layout and real-time updates.
-
----
+- Configurable items per page
+- Page navigation with numbered buttons
+- Active page indicator
+- Respects all active filters and search terms
