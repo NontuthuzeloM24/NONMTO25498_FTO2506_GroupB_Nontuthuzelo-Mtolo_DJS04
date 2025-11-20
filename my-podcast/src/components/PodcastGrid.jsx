@@ -1,46 +1,39 @@
-import React, { useState } from "react";
 import PodcastCard from "./PodcastCard";
+import { PodcastContext } from "../context/PodcastContext";
+import styles from "./PodcastGrid.module.css";
+import { useContext } from "react";
 
 /**
- * Grid layout for podcast cards
+ * PodcastGrid Component
+ *
+ * Renders a responsive grid of podcast preview cards using filtered and paginated
+ * podcast data from context. Each card displays a podcast’s metadata including
+ * title, image, genres, season count, and last updated date.
+ *
+ * If the filtered list is empty, it displays a user-friendly "no results" message.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {{id: number, name: string}[]} props.genres - Array of genre definitions used to resolve genre IDs in each podcast
+ *
+ * @returns {JSX.Element} A grid of <PodcastCard> components or a message if no results are found
  */
-const PodcastGrid = ({ podcasts }) => {
-  const [selectedPodcast, setSelectedPodcast] = useState(null);
-
+export default function PodcastGrid({ genres }) {
+  const { podcasts } = useContext(PodcastContext);
+  if (!podcasts.length) {
+    return (
+      <p className={styles.noResults}>
+        No podcasts match your search or filters.
+      </p>
+    );
+  }
   return (
     <>
-      <div className="grid">
+      <div className={styles.grid}>
         {podcasts.map((podcast) => (
-          <PodcastCard key={podcast.id} podcast={podcast} onClick={() => setSelectedPodcast(podcast)} />
+          <PodcastCard key={podcast.id} podcast={podcast} genres={genres} />
         ))}
       </div>
-
-      {selectedPodcast && (
-        <div className="modal" onClick={() => setSelectedPodcast(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={() => setSelectedPodcast(null)}>
-              &times;
-            </button>
-            <div className="banner">
-              <img src={selectedPodcast.image} alt={selectedPodcast.title} className="modal-img" />
-              <div className="info-section">
-                <h2>{selectedPodcast.title}</h2>
-                <p>{selectedPodcast.description}</p>
-                <p className="modal-updated-text">Updated: {new Date(selectedPodcast.updated).toLocaleDateString()}</p>
-                <div className="tags">
-                  {selectedPodcast.tags.map((tag, i) => (
-                    <span className="tag" key={i}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
-};
-
-export default PodcastGrid;
+}

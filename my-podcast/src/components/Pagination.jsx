@@ -1,27 +1,31 @@
+import { useContext } from "react";
+import { PodcastContext } from "../context/PodcastContext";
+import styles from "./Pagination.module.css";
+
 /**
- * Pagination component
- * @param {Object} props
- * @param {number} props.currentPage
- * @param {Function} props.setCurrentPage
- * @param {number} props.totalPages
+ * Numeric pagination bar.
  */
-const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
+export default function Pagination() {
+  const { page, setPage, totalPages } = useContext(PodcastContext);
+
+  if (totalPages <= 1) return null;
+
+  /**
+   * Build page list.
+   */
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className="pagination">
-      {pages.map((page) => (
+    <div className={styles.paginationWrapper}>
+      {pages.map((p) => (
         <button
-          key={page}
-          className={page === currentPage ? "active" : ""}
-          onClick={() => setCurrentPage(page)}
+          key={p}
+          className={`${styles.pageButton} ${p === page ? styles.active : ""}`}
+          onClick={() => setPage(p)}
         >
-          {page}
+          {p}
         </button>
       ))}
     </div>
   );
-};
-
-export default Pagination;
-
+}

@@ -1,29 +1,41 @@
+import { formatDate } from "../utils/formatDate";
+import styles from "./PodcastCard.module.css";
+
 /**
- * Podcast card component
+ * Renders a single podcast preview card with image, title, number of seasons,
+ * genres (as styled tags), and the last updated date.
+ *
  * @param {Object} props
- * @param {Object} props.podcast - Podcast item
- * @param {Function} props.onClick - Open modal callback
+ * @param {Object} props.podcast - The podcast data object to display.
+ * @param {string} props.podcast.id - Unique ID of the podcast.
+ * @param {string} props.podcast.title - Title of the podcast.
+ * @param {string} props.podcast.image - URL of the podcast image.
+ * @param {number} props.podcast.seasons - Number of seasons available.
+ * @param {string} props.podcast.updated - ISO date string for the last update.
+ * @param {Array<Object>} props.genres - Array of genre objects for mapping IDs to titles.
+ *
+ * @returns {JSX.Element} The rendered podcast card component.
  */
-const PodcastCard = ({ podcast, onClick }) => {
+export default function PodcastCard({ podcast, genres }) {
+  const genreSpans = podcast.genres.map((id) => {
+    const match = genres.find((genre) => genre.id === id);
+    return (
+      <span key={id} className={styles.tag}>
+        {match ? match.title : `Unknown (${id})`}
+      </span>
+    );
+  });
+
   return (
-    <div className="card" onClick={onClick}>
+    <div className={styles.card}>
       <img src={podcast.image} alt={podcast.title} />
+
       <h3>{podcast.title}</h3>
-      <p>{podcast.description?.substring(0, 100)}...</p>
-
-      <div className="tags">
-        {(podcast.tags || []).map((tag, i) => (
-          <span key={i} className="tag">{tag}</span>
-        ))}
-      </div>
-
-      {podcast.updated && (
-        <p className="updated-text">
-          Updated: {new Date(podcast.updated).toLocaleDateString()}
-        </p>
-      )}
+      <p className={styles.seasons}>{podcast.seasons} seasons</p>
+      <div className={styles.tags}>{genreSpans}</div>
+      <p className={styles.updatedText}>
+        Updated {formatDate(podcast.updated)}
+      </p>
     </div>
   );
-};
-
-export default PodcastCard;
+}
